@@ -1,13 +1,16 @@
 import imaplib as imap  
 import email
 import os
+from dotenv import load_dotenv
+load_dotenv()
 mail=imap.IMAP4_SSL('imap.gmail.com')
-useremail=os.getenv('useremail')
-passwrd=os.getenv('password')
-
-mail.login(useremail,passwrd)
+user=os.getenv('useremail')
+passw=os.getenv('password')
+print(user)
+print(passw)
+mail.login(user,passw)
 mail.select('inbox')
-status,messages=mail.search(NONE,'ALL')
+status,messages=mail.search(None,'ALL')
 emails=messages[0].split()
 emailid=emails[-1]
 status,msgdata=mail.fetch(emailid,'(RFC822)')
